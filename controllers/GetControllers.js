@@ -7,7 +7,6 @@ const GetControllers = {
         location: location,
         services: { $in: [service] }
       })
-      console.log(hospitals);
       res.status(200).json(hospitals)
     } catch (error) {
       res.status(404).json({ message: error.message })

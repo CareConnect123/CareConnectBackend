@@ -3,7 +3,8 @@ import {
   BookMedicine,
   BookOxygen,
   BookedBlood,
-  BookedBeds
+  BookedBeds,
+  CallRequets
 } from '../../models'
 const LabTest = {
   async bookTest (req, res, next) {
@@ -127,6 +128,31 @@ const LabTest = {
 
       await bookedBed.save()
       res.json({ message: 'Blood Booked', bookedBed })
+    } catch (error) {
+      return next(error)
+    }
+  },
+  async callReq (req, res, next) {
+    const user = req.user._id
+    const query = req.body.query
+    const timeslot = req.params.timeslot
+    const date = req.params.date
+
+    console.log(query);
+    try {
+      if (!user || !query || !timeslot) {
+        return
+      }
+
+      const callreq = new CallRequets({
+        user,
+        query,
+        timeslot,
+        date
+      })
+
+      await callreq.save()
+      res.json({ message: 'Blood Booked', callreq })
     } catch (error) {
       return next(error)
     }

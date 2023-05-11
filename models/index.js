@@ -15,6 +15,7 @@ export { default as BookedAppointment } from './bookedAppointments'
 export { default as BookedLabtest } from './bookedLabTests'
 export { default as BookedBlood } from './bookBloodBank'
 export { default as BookedBeds } from './bookBeds'
+export { default as CallRequets } from './call'
 
 
 

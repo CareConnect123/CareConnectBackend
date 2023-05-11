@@ -5,9 +5,9 @@ import {
   BookedBlood,
   BookedAppointment,
   OnlineConsultation,
-  BookedBeds
+  BookedBeds,
+  CallRequets
 } from '../models'
-import bookBeds from '../models/bookBeds'
 
 const UserPanel = {
   async getMedsByUser (req, res, next) {
@@ -74,7 +74,7 @@ const UserPanel = {
     try {
       const userId = req.user._id
 
-      const mybeds = await bookBeds
+      const mybeds = await BookedBeds
         .find({
           user: userId
         })
@@ -102,37 +102,40 @@ const UserPanel = {
       const userId = req.user._id
 
       const mymeds = await BookMedicine.find({ user: userId }).populate(
-        'medicine user'
+        'medicine'
       )
 
       const mylLabTests = await BookedLabtest.find({ user: userId }).populate(
-        'testType user'
+        'testType'
       )
 
       const myOxygens = await BookOxygen.find({ user: userId }).populate(
-        'center user'
+        'center'
       )
 
       const myAppointments = await BookedAppointment.find({
         user: userId
-      }).populate('doctor user')
+      }).populate('doctor')
 
       const myConsultations = await OnlineConsultation.find({
         user: userId
-      }).populate('doctor user')
+      }).populate('doctor')
 
-      const mybeds = await bookBeds
+      const mybeds = await BookedBeds
         .find({
           user: userId
         })
-        .populate('hospital user')
+        .populate('hospital')
 
       const myBloods = await BookedBlood.find({ user: userId }).populate(
-        'bloodbank user'
+        'bloodbank'
+      )
+      const calls = await CallRequets.find({ user: userId }).populate(
+        'user'
       )
 
 
-      res.json({mymeds, myAppointments, myBloods, myConsultations, myOxygens, mybeds, mylLabTests})
+      res.json({mymeds, myAppointments, myBloods, myConsultations, myOxygens, mybeds, mylLabTests, calls})
     } catch (error) {
       next(error)
     }

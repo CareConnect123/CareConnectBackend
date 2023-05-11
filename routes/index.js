@@ -4,9 +4,11 @@ import {
   Doctors,
   Bookings,
   GetControllers,
-  UserPanel
+  UserPanel,
+  AdminController
 } from '../controllers'
 import auth from '../middleware/auth'
+import admin from '../middleware/admin'
 
 const router = express.Router()
 
@@ -68,9 +70,13 @@ router.post(
   auth,
   Bookings.bookBed
 )
+router.post(
+  '/call/:timeslot/:date',
+  auth,
+  Bookings.callReq
+)
 
 // User Panel
-
 router.get('/getUserMeds', auth, UserPanel.getMedsByUser)
 router.get('/getUserLabTests', auth, UserPanel.getLabTestByUser)
 router.get('/getUserOxygen', auth, UserPanel.getOxygenByUser)
@@ -78,7 +84,19 @@ router.get('/getUserBlood', auth, UserPanel.getBloodByUser)
 router.get('/getUserApointments', auth, UserPanel.getAppointmentByUser)
 router.get('/getUserConsultation', auth, UserPanel.getConsultationByUser)
 router.get('/getUserBeds', auth, UserPanel.getBedsByUser)
-
 router.get('/allUserDetails', auth, UserPanel.getall)
+
+// ADMIN PANEL
+
+router.delete('/deleteLabTes/:id', AdminController.deleteLabTest)
+router.delete('/deleteAppointment/:id', AdminController.deleteAppointments)
+router.delete('/deleteOnlineConsult/:id', AdminController.deleteOnCon)
+router.delete('/deleteOxygen/:id', AdminController.deleteOxygen)
+router.delete('/deleteblood/:id', AdminController.deleteBlood)
+router.delete('/deletebed/:id', AdminController.deleteBed)
+router.delete('/deleteMeds/:id', AdminController.deleteMeds)
+router.delete('/deletecalls/:id', AdminController.deleteMeds)
+
+router.get('/allDataAdmin', AdminController.getAll)
 
 export default router

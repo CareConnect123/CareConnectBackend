@@ -18,7 +18,6 @@ const auth = async (req, res, next) => {
       role
     }
     req.user = user
-
     next()
   } catch (error) {
     return next(CustomErrorHandler.unAuthorized('something Went Wrong'))
