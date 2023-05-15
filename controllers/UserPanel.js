@@ -130,9 +130,7 @@ const UserPanel = {
       const myBloods = await BookedBlood.find({ user: userId }).populate(
         'bloodbank'
       )
-      const calls = await CallRequets.find({ user: userId }).populate(
-        'user'
-      )
+      const calls = await CallRequets.find({ user: userId })
 
 
       res.json({mymeds, myAppointments, myBloods, myConsultations, myOxygens, mybeds, mylLabTests, calls})
