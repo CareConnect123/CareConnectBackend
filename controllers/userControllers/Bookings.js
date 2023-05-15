@@ -138,7 +138,6 @@ const LabTest = {
     const timeslot = req.params.timeslot
     const date = req.params.date
 
-    console.log(query);
     try {
       if (!user || !query || !timeslot) {
         return
