@@ -72,7 +72,7 @@ router.post(
 )
 router.post(
   '/call/:timeslot/:date',
-  auth,
+  
   Bookings.callReq
 )
 

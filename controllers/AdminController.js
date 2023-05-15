@@ -25,7 +25,7 @@ const AdminController = {
 
       const mybeds = await BookedBeds.find().populate('user hospital')
       const myBloods = await BookedBlood.find().populate('bloodbank user')
-      const calls = await CallRequets.find().populate('user')
+      const calls = await CallRequets.find()
 
       res.json({
         mymeds,

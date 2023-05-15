@@ -2,13 +2,17 @@ import mongoose from 'mongoose'
 
 const callSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+    query: {
+      type: String,
       required: true
     },
-    query: {
-      type: String
+    name: {
+      type: String,
+      required: true
+    },
+    number: {
+      type: Number,
+      required: true
     },
     timeslot: {
       type: String,

@@ -133,21 +133,23 @@ const LabTest = {
     }
   },
   async callReq (req, res, next) {
-    const user = req.user._id
-    const query = req.body.query
     const timeslot = req.params.timeslot
     const date = req.params.date
 
+    const { name, number, query } = req.body
+    console.log(name, number, query)
+
     try {
-      if (!user || !query || !timeslot) {
+      if (!query || !timeslot) {
         return
       }
 
       const callreq = new CallRequets({
-        user,
         query,
         timeslot,
-        date
+        date,
+        name,
+        number
       })
 
       await callreq.save()
